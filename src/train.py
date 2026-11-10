@@ -52,9 +52,13 @@ def train(args: argparse.Namespace) -> dict:
     torch.use_deterministic_algorithms(True)
 
     features, targets, ids = load_training_data(args.train_csv)
+    
+    # データセットを訓練集合とテスト集合に分割する
     train_indices, validation_indices = train_test_split(
         np.arange(len(features)), test_size=args.validation_size, random_state=args.seed,
     )
+    
+    # 前処理
     preprocessing = fit_preprocessing(features.iloc[train_indices], targets.iloc[train_indices])
     train_features = transform_features(features.iloc[train_indices], preprocessing)
     validation_features = transform_features(features.iloc[validation_indices], preprocessing)
@@ -67,8 +71,14 @@ def train(args: argparse.Namespace) -> dict:
         generator=torch.Generator().manual_seed(args.seed),
     )
     model = MLPRegressor(train_features.shape[1])
+    
+    # 損失
     criterion = nn.MSELoss()
+    
+    # 最適化アルゴリズム
     optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate)
+    
+    # 学習設定の記録
     config = {
         "train_csv": str(args.train_csv.resolve()),
         "epochs": args.epochs,
@@ -94,6 +104,7 @@ def train(args: argparse.Namespace) -> dict:
         f"features={train_features.shape[1]}; device=cpu", flush=True,
     )
 
+    # 学習
     for epoch in range(1, args.epochs + 1):
         model.train()
         loss_sum = 0.0
@@ -116,6 +127,8 @@ def train(args: argparse.Namespace) -> dict:
             "train_mse": train_mse,
             "validation_mse": validation_mse,
         })
+        
+        # MSEが下回ったら、最良チェックポイントを更新
         if validation_mse < best_mse:
             best_mse = validation_mse
             best_checkpoint = {
@@ -126,7 +139,6 @@ def train(args: argparse.Namespace) -> dict:
                 },
                 "input_dim": train_features.shape[1],
                 "preprocessing": preprocessing,
-                "config": config,
                 "split": {
                     "train_indices": train_indices.tolist(),
                     "validation_indices": validation_indices.tolist(),
@@ -142,7 +154,8 @@ def train(args: argparse.Namespace) -> dict:
                 f"validation MSE={validation_mse:.6f}", flush=True,
             )
 
-    torch.save(best_checkpoint, args.output_dir / "model.pt")
+    # 学習結果を保存
+    torch.save({**best_checkpoint, "config": config}, args.output_dir / "model.pt")
     model.load_state_dict(best_checkpoint["model_state_dict"])
     best_predictions = inverse_targets(predict(model, validation_features), preprocessing)
     metrics = validation_metrics(validation_targets_raw, best_predictions)
@@ -174,6 +187,7 @@ def train(args: argparse.Namespace) -> dict:
         "predicted_DIC": best_predictions,
     }).to_csv(args.output_dir / "validation_predictions.csv", index=False)
 
+    # 学習曲線の出力
     figure, axis = plt.subplots(figsize=(8, 5))
     axis.plot([row["epoch"] for row in history], [row["train_mse"] for row in history], label="Train")
     axis.plot([row["epoch"] for row in history], [row["validation_mse"] for row in history], label="Validation")
