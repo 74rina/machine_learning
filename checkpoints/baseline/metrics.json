@@ -1,0 +1,57 @@
+{
+  "validation_mse": 28.039511933007258,
+  "validation_rmse": 5.295234832659196,
+  "best_epoch": 129,
+  "last_epoch_validation_mse": 36.381518613887984,
+  "mean_predictor_validation_mse": 13417.320662207789,
+  "total_rows": 1454,
+  "train_rows": 1163,
+  "validation_rows": 291,
+  "feature_count": 16,
+  "feature_columns": [
+    "Lat_Dec",
+    "Lon_Dec",
+    "NO2uM",
+    "NO3uM",
+    "NH3uM",
+    "R_TEMP",
+    "R_Depth",
+    "R_Sal",
+    "R_DYNHT",
+    "R_Nuts",
+    "R_Oxy_micromol.Kg",
+    "PO4uM",
+    "SiO3uM",
+    "TA1",
+    "Salinity1",
+    "Temperature_degC"
+  ],
+  "train_csv_sha256": "97ad9fb69fa99c0acd5361fd102d05ff08b2b53125ca1ecbcf689134e1d0a42d",
+  "completed_at": "2026-11-10T13:53:38+09:00",
+  "python_version": "3.13.11",
+  "package_versions": {
+    "pandas": "3.1.1",
+    "numpy": "2.5.4",
+    "scikit-learn": "1.9.1",
+    "torch": "2.15.0",
+    "matplotlib": "3.11.2"
+  },
+  "config": {
+    "train_csv": "/Users/rinayoneyama/rina/Keio/machine_learning/dataset/train.csv",
+    "epochs": 200,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "validation_size": 0.2,
+    "seed": 42,
+    "threads": 1,
+    "device": "cpu",
+    "hidden_dims": [
+      64,
+      32
+    ],
+    "loss": "MSELoss on standardized DIC",
+    "optimizer": "Adam",
+    "early_stopping": false,
+    "selection_metric": "minimum validation MSE in original DIC scale"
+  }
+}
