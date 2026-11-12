@@ -1,0 +1,73 @@
+{
+  "experiment_date": "2026-11-12",
+  "training_epochs": 5000,
+  "early_stopping": false,
+  "restore_best_weights": false,
+  "selection": "Lowest three-seed mean final-epoch validation MSE; best observed epoch is diagnostic only",
+  "seeds": [
+    42,
+    123,
+    2026
+  ],
+  "split_seed": 42,
+  "train_rows": 1163,
+  "validation_rows": 291,
+  "input_features": 15,
+  "hidden_layers": [
+    128,
+    64
+  ],
+  "activation": "ReLU",
+  "output": "Linear(1)",
+  "target_standardized": false,
+  "excluded_features": [
+    "id",
+    "Unnamed: 12",
+    "TA1.x (not in test column intersection)"
+  ],
+  "preprocessing": "Mean imputation and StandardScaler fitted on training split only",
+  "optimizer": "Adam",
+  "batch_size": 64,
+  "validation_batch_size": 64,
+  "torch_threads": 1,
+  "deterministic_algorithms": true,
+  "train_loader_generator": "torch.Generator().manual_seed(each run seed)",
+  "stage1_initial_lrs": [
+    0.0001,
+    0.0003,
+    0.001,
+    0.003
+  ],
+  "stage1_scheduler": "constant",
+  "stage1_winning_initial_lr": 0.001,
+  "stage2_schedulers": {
+    "constant": {},
+    "plateau": {
+      "type": "ReduceLROnPlateau",
+      "mode": "min",
+      "factor": 0.5,
+      "patience": 100,
+      "threshold": 0.0001,
+      "min_lr": 1e-06
+    },
+    "cosine": {
+      "type": "CosineAnnealingLR",
+      "T_max": 5000,
+      "eta_min": 1e-06
+    }
+  },
+  "scheduler_step": "Once after epoch training and validation; plateau receives that epoch validation MSE",
+  "history_lr": "Learning rate actually used in that epoch before scheduler.step()",
+  "selected_case": "lr-1e-03_cosine",
+  "selected_initial_lr": 0.001,
+  "selected_scheduler": "cosine",
+  "selected_final_mse_mean": 34.4821662902832,
+  "selected_final_mse_sample_std": 2.338252379179919,
+  "sample_std_ddof": 1,
+  "baseline_mean": 39.127201080322266,
+  "improvement_percent": 11.871625523388463,
+  "shared_control": "lr-1e-03_constant histories/checkpoints copied from shared baseline controls; not retrained",
+  "fairness": "Initial model SHA256 identical for every seed across all six cases; independent first-three-epoch checks exactly match shared controls",
+  "timing": "Measured wall time under concurrent local experiments; indicative, not an isolated timing benchmark",
+  "data_sha256": "97ad9fb69fa99c0acd5361fd102d05ff08b2b53125ca1ecbcf689134e1d0a42d"
+}
