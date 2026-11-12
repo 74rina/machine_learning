@@ -1,0 +1,99 @@
+{
+  "experiment_date": "2026-11-12",
+  "notebook": "Quiz2401_Yoneyama_Rina.ipynb",
+  "optimizer": "AdamW",
+  "initial_lr": 0.001,
+  "scheduler": {
+    "type": "CosineAnnealingLR",
+    "T_max": 5000,
+    "eta_min": 1e-06
+  },
+  "loss": "MSE",
+  "epochs": 5000,
+  "seeds": [
+    42,
+    123,
+    2026
+  ],
+  "split_seed": 42,
+  "train_rows": 1163,
+  "validation_rows": 291,
+  "batch_size": 64,
+  "validation_batch_size": 64,
+  "feature_columns": [
+    "Lat_Dec",
+    "Lon_Dec",
+    "NO2uM",
+    "NO3uM",
+    "NH3uM",
+    "R_TEMP",
+    "R_Depth",
+    "R_Sal",
+    "R_DYNHT",
+    "R_Nuts",
+    "R_Oxy_micromol.Kg",
+    "PO4uM",
+    "SiO3uM",
+    "Salinity1",
+    "Temperature_degC"
+  ],
+  "preprocessing": {
+    "imputer": "Mean imputation fitted on training split",
+    "scaler": "StandardScaler fitted on the imputed training CSV rows, including validation, as in the existing notebook"
+  },
+  "runtime": {
+    "device": "CPU",
+    "architecture": "arm64",
+    "torch_version": "2.15.0",
+    "torch_threads": 1,
+    "deterministic_algorithms": true,
+    "OPENBLAS_NUM_THREADS": 1,
+    "OMP_NUM_THREADS": 1
+  },
+  "grid_candidates": [
+    0.02,
+    0.021,
+    0.022,
+    0.023,
+    0.024,
+    0.025,
+    0.026,
+    0.027,
+    0.028,
+    0.029,
+    0.03
+  ],
+  "refinement_candidates": [
+    0.0205
+  ],
+  "selection": "Lowest mean final-epoch validation MSE across the three seeds. Best-epoch metrics are diagnostic.",
+  "sample_std_ddof": 1,
+  "selected": {
+    "weight_decay": 0.02,
+    "stage": "grid",
+    "runs": 3,
+    "final_val_mse_mean": 29.477984110514324,
+    "final_val_mse_std": 1.9303672782760637,
+    "final_val_rmse_mean": 5.427389168621197,
+    "final_val_r2_mean": 0.9977948268254598
+  },
+  "baseline": {
+    "weight_decay": 0.025,
+    "stage": "grid",
+    "runs": 3,
+    "final_val_mse_mean": 29.866132736206055,
+    "final_val_mse_std": 1.0981294110274202,
+    "final_val_rmse_mean": 5.464375701488445,
+    "final_val_r2_mean": 0.9977657794952393
+  },
+  "relative_mse_reduction_percent": 1.2996280071480015,
+  "notebook_verification": {
+    "seed": 42,
+    "final_val_mse": 27.287939071655273,
+    "final_val_rmse": 5.223785894507476,
+    "final_val_r2": 0.9979586601257324,
+    "optimizer_updates": 95000,
+    "matched_sweep_run": true
+  },
+  "data_sha256": "97ad9fb69fa99c0acd5361fd102d05ff08b2b53125ca1ecbcf689134e1d0a42d"
+}
