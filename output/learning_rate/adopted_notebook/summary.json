@@ -1,0 +1,64 @@
+{
+  "initial_lr": 0.001,
+  "scheduler": "cosine",
+  "seed": 42,
+  "split_seed": 42,
+  "epochs": 5000,
+  "batch_size": 64,
+  "val_batch_size": 64,
+  "feature_columns": [
+    "Lat_Dec",
+    "Lon_Dec",
+    "NO2uM",
+    "NO3uM",
+    "NH3uM",
+    "R_TEMP",
+    "R_Depth",
+    "R_Sal",
+    "R_DYNHT",
+    "R_Nuts",
+    "R_Oxy_micromol.Kg",
+    "PO4uM",
+    "SiO3uM",
+    "Salinity1",
+    "Temperature_degC"
+  ],
+  "final_val_mse": 32.32686233520508,
+  "final_val_rmse": 5.685671669662704,
+  "final_val_r2": 0.9975817203521729,
+  "final_train_mse": 19.044846852073768,
+  "best_val_mse": 31.922073364257812,
+  "best_epoch": 3459,
+  "optimizer_updates": 95000,
+  "elapsed_seconds": 30.701265749987215,
+  "initial_model_state_sha256": "118319b0e0ebed73ca1806a629bd7b5641a6d9725acebb7bbe2742ba67bac866",
+  "data_sha256": "97ad9fb69fa99c0acd5361fd102d05ff08b2b53125ca1ecbcf689134e1d0a42d",
+  "first_three_epochs": [
+    {
+      "epoch": 1,
+      "train_loss": 4640019.489681858,
+      "val_loss": 4605236.0,
+      "train_r2": -365.9586181640625,
+      "val_r2": -343.50787353515625,
+      "learning_rate": 0.001
+    },
+    {
+      "epoch": 2,
+      "train_loss": 4628102.363284608,
+      "val_loss": 4584806.5,
+      "train_r2": -365.01611328125,
+      "val_r2": -341.9796142578125,
+      "learning_rate": 0.0009999999014026553
+    },
+    {
+      "epoch": 3,
+      "train_loss": 4598084.566208082,
+      "val_loss": 4536636.0,
+      "train_r2": -362.6421813964844,
+      "val_r2": -338.37603759765625,
+      "learning_rate": 0.0009999996056106603
+    }
+  ],
+  "deployment": "Final epoch weights; no early stopping or best-weight restoration",
+  "checkpoint_reload_val_mse": 32.32686233520508
+}
