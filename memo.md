@@ -18,4 +18,4 @@
 | 実行環境           | CPU、PyTorch のスレッド数 1、決定的な演算を使用           |
 
 学習曲線
-![alt text](image.png)
+![ベースラインの学習曲線](output/baseline.png)
