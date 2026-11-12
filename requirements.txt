@@ -36,6 +36,7 @@ tzdata==2026.6
 
 # VS Code / Jupyter Notebook 用カーネルと間接依存（同じ .venv で固定）。
 ipykernel==7.4.0
+nbstripout==0.8.1
 appnope==1.0.0; sys_platform == "darwin"
 asttokens==3.0.2
 comm==0.2.3

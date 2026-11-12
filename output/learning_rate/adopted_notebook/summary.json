@@ -30,7 +30,7 @@
   "best_val_mse": 31.922073364257812,
   "best_epoch": 3459,
   "optimizer_updates": 95000,
-  "elapsed_seconds": 29.301330416987184,
+  "elapsed_seconds": 30.787973875005264,
   "initial_model_state_sha256": "118319b0e0ebed73ca1806a629bd7b5641a6d9725acebb7bbe2742ba67bac866",
   "data_sha256": "97ad9fb69fa99c0acd5361fd102d05ff08b2b53125ca1ecbcf689134e1d0a42d",
   "first_three_epochs": [
