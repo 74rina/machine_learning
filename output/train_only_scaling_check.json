@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-11-12T15:10:24+09:00",
+  "change": "Replace fit_transform(X_train) with explicit fit(X_train) and transform; assert training fit row count.",
+  "preexisting_behavior": "Training-only imputation and standardization were already implemented.",
+  "training_rerun": false,
+  "reason_no_retraining": "All train, validation and test transformed arrays are exactly identical; the same original final model was reevaluated.",
+  "scaler_fit_rows_before": 1163,
+  "scaler_fit_rows_after": 1163,
+  "feature_means_equal": true,
+  "feature_scales_equal": true,
+  "transformed_arrays_equal": {
+    "X_train": true,
+    "X_val": true,
+    "test_scaled": true
+  },
+  "weight_epoch": 5000,
+  "validation_rows": 291,
+  "validation_mse_before": 50.91810607910156,
+  "validation_mse_after": 50.91810607910156,
+  "validation_mse_difference": 0.0,
+  "validation_rmse_after": 7.135692403621499,
+  "validation_r2_before": 0.9961909055709839,
+  "validation_r2_after": 0.9961909055709839,
+  "validation_r2_difference": 0.0,
+  "evaluation_implementation": "PyTorch float32 nn.MSELoss and sklearn r2_score, same as notebook.",
+  "python": "3.13.11",
+  "torch": "2.15.0",
+  "threads": 4
+}

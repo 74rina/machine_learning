@@ -1,0 +1,327 @@
+{
+  "provenance": {
+    "run": "Original existing live VS Code notebook kernel run; not retrained",
+    "history_recovered_from_existing_kernel": true,
+    "history_source_snapshot": "/tmp/calcofi_original_kernel_snapshot.json",
+    "history_source_sha256": "b70f52ab163506079509977c8ca4a66606ab3270b2cdc02e0776b627e2f6c53f",
+    "source_notebook": "Quiz2401_Yoneyama_Rina.ipynb",
+    "source_notebook_sha256": "447dc675b80cd0d2704e1419e6f92e0c48e36bcee9078dc88fadeeb83b7c4596",
+    "source_notebook_snapshot": "/tmp/calcofi_notebook_before_scaling.ipynb",
+    "source_notebook_capture": "Pre-refactor notebook snapshot captured before subsequent scaling/notebook edits; this hash describes the original run source snapshot, not a later edited notebook.",
+    "original_plot": "output/baseline.png",
+    "original_plot_sha256": "b5c42f67143f9006350b9673b9d50b0319cb57b82c9efcf81472b94284e722c9",
+    "original_plot_preserved": true,
+    "note": "Actual recovered 5000-epoch notebook settings and metrics. These differ from the earlier 64/32, batch32, 200-epoch prototype settings."
+  },
+  "configuration": {
+    "target": "DIC",
+    "input_dim": 15,
+    "model": "MLP",
+    "hidden_dims": [
+      128,
+      64
+    ],
+    "activation": "ReLU",
+    "output": "Linear(64, 1)",
+    "target_transform": "None; raw DIC float32",
+    "loss": "torch.nn.MSELoss(reduction=mean)",
+    "optimizer": "torch.optim.Adam",
+    "learning_rate": 0.001,
+    "batch_size": 64,
+    "epochs": 5000,
+    "early_stopping": false,
+    "learning_rate_scheduler": null,
+    "train_shuffle": true,
+    "validation_shuffle": false,
+    "validation_fraction": 0.2,
+    "split_random_state": 42,
+    "torch_training_seed_explicitly_fixed": false,
+    "observed_torch_initial_seed": 16934215229843895116,
+    "randomness_note": "42 was passed only to train_test_split; the original notebook did not explicitly seed model initialization or shuffled training batches.",
+    "torch_num_threads": 4,
+    "deterministic_algorithms": false,
+    "torch_version": "2.15.0",
+    "device": "cpu",
+    "imputation": "SimpleImputer(strategy=mean), fit on training rows only",
+    "feature_scaling": "StandardScaler, fit on training rows only",
+    "preprocessing_fit_rows": 1163,
+    "feature_selection": "Intersection of original train/test column names; id, Unnamed: 12 and DIC excluded. TA1.x/TA1 mismatch excludes alkalinity in this original run."
+  },
+  "input_features": [
+    "Lat_Dec",
+    "Lon_Dec",
+    "NO2uM",
+    "NO3uM",
+    "NH3uM",
+    "R_TEMP",
+    "R_Depth",
+    "R_Sal",
+    "R_DYNHT",
+    "R_Nuts",
+    "R_Oxy_micromol.Kg",
+    "PO4uM",
+    "SiO3uM",
+    "Salinity1",
+    "Temperature_degC"
+  ],
+  "dataset": {
+    "train_rows_total": 1454,
+    "training_rows": 1163,
+    "validation_rows": 291,
+    "test_rows": 485,
+    "sha256": {
+      "dataset/train.csv": "97ad9fb69fa99c0acd5361fd102d05ff08b2b53125ca1ecbcf689134e1d0a42d",
+      "dataset/test.csv": "8b4b8b3b87487f7eb5ae6b0cc335e79f626010cae395442a191793f543908260",
+      "dataset/sample_submission.csv": "7bfbc0572816d170c5f988813d0e3122675bd2fff2e754a5c05198243fc52afd"
+    }
+  },
+  "metric_semantics": {
+    "mse_units": "Original raw DIC units squared",
+    "rmse_units": "Original raw DIC units",
+    "train": "Recorded training-mode batch predictions while weights are updated within the epoch; sample-weighted mean MSE and pooled R2. Not a separate end-of-epoch evaluation with fixed final weights.",
+    "validation": "End-of-epoch model.eval() predictions on held-out 291 rows, using torch.no_grad(); MSE and sklearn R2 from float32 labels/predictions.",
+    "best_epoch_selection": "Minimum validation MSE across all 5000 epochs; local validation selection, not a separate unbiased test score.",
+    "precision": "Recovered float32 MSE/R2 retained; RMSE=sqrt(recovered MSE). Small differences from float64 rescoring are expected."
+  },
+  "best_validation_epoch": 3097,
+  "best": {
+    "epoch": 3097,
+    "train_mse": 23.193862582934077,
+    "train_rmse": 4.816000683444104,
+    "train_r2": 0.9981657266616821,
+    "validation_mse": 36.09127426147461,
+    "validation_rmse": 6.007601373383109,
+    "validation_r2": 0.9973000884056091
+  },
+  "final": {
+    "epoch": 5000,
+    "train_mse": 18.954511109038048,
+    "train_rmse": 4.353677883013171,
+    "train_r2": 0.9985009431838989,
+    "validation_mse": 50.91810607910156,
+    "validation_rmse": 7.135692403621499,
+    "validation_r2": 0.9961909055709839
+  },
+  "mean_predictor": {
+    "fit": "Constant training-label mean evaluated on raw validation labels with sklearn",
+    "prediction": 2151.8803352227,
+    "validation_mse": 13417.320662207789,
+    "validation_rmse": 115.83315873361906,
+    "validation_r2": -0.0037210136100702673
+  },
+  "milestones": [
+    {
+      "epoch": 1,
+      "train_mse": 4641121.085124678,
+      "train_rmse": 2154.326132488922,
+      "train_r2": -366.04571533203125,
+      "validation_mse": 4608102.5,
+      "validation_rmse": 2146.6491329511678,
+      "validation_r2": -343.7223205566406
+    },
+    {
+      "epoch": 100,
+      "train_mse": 15296.691152662834,
+      "train_rmse": 123.67979282268722,
+      "train_r2": -0.2097475528717041,
+      "validation_mse": 15656.701171875,
+      "validation_rmse": 125.1267404349486,
+      "validation_r2": -0.17124438285827637
+    },
+    {
+      "epoch": 200,
+      "train_mse": 2461.0529907961295,
+      "train_rmse": 49.60900110661501,
+      "train_r2": 0.8053662180900574,
+      "validation_mse": 3182.135009765625,
+      "validation_rmse": 56.41041579146199,
+      "validation_r2": 0.7619512677192688
+    },
+    {
+      "epoch": 500,
+      "train_mse": 293.18131171478245,
+      "train_rmse": 17.12253812128279,
+      "train_r2": 0.9768136143684387,
+      "validation_mse": 365.7083740234375,
+      "validation_rmse": 19.12350318386873,
+      "validation_r2": 0.9726421236991882
+    },
+    {
+      "epoch": 1000,
+      "train_mse": 57.64898369379937,
+      "train_rmse": 7.592692782787894,
+      "train_r2": 0.9954407811164856,
+      "validation_mse": 71.03271484375,
+      "validation_rmse": 8.428090818432725,
+      "validation_r2": 0.9946861863136292
+    },
+    {
+      "epoch": 1500,
+      "train_mse": 34.77151202909514,
+      "train_rmse": 5.896737405472211,
+      "train_r2": 0.9972500801086426,
+      "validation_mse": 65.20867156982422,
+      "validation_rmse": 8.075188639890973,
+      "validation_r2": 0.9951218962669373
+    },
+    {
+      "epoch": 2000,
+      "train_mse": 30.86834325651003,
+      "train_rmse": 5.555928658335169,
+      "train_r2": 0.9975587725639343,
+      "validation_mse": 43.777889251708984,
+      "validation_rmse": 6.6164861710509895,
+      "validation_r2": 0.9967250823974609
+    },
+    {
+      "epoch": 3000,
+      "train_mse": 31.72550156069335,
+      "train_rmse": 5.632539530326738,
+      "train_r2": 0.9974909424781799,
+      "validation_mse": 47.60311508178711,
+      "validation_rmse": 6.899501074844985,
+      "validation_r2": 0.9964389204978943
+    },
+    {
+      "epoch": 3097,
+      "train_mse": 23.193862582934077,
+      "train_rmse": 4.816000683444104,
+      "train_r2": 0.9981657266616821,
+      "validation_mse": 36.09127426147461,
+      "validation_rmse": 6.007601373383109,
+      "validation_r2": 0.9973000884056091
+    },
+    {
+      "epoch": 4000,
+      "train_mse": 22.664813091707764,
+      "train_rmse": 4.760757617407944,
+      "train_r2": 0.9982075691223145,
+      "validation_mse": 45.01764678955078,
+      "validation_rmse": 6.709519117608265,
+      "validation_r2": 0.9966323375701904
+    },
+    {
+      "epoch": 5000,
+      "train_mse": 18.954511109038048,
+      "train_rmse": 4.353677883013171,
+      "train_r2": 0.9985009431838989,
+      "validation_mse": 50.91810607910156,
+      "validation_rmse": 7.135692403621499,
+      "validation_r2": 0.9961909055709839
+    }
+  ],
+  "window_summaries": {
+    "epochs_1000_to_2000_inclusive": {
+      "first_epoch": 1000,
+      "last_epoch": 2000,
+      "epoch_count": 1001,
+      "best_validation_epoch": 1915,
+      "metrics": {
+        "train_mse": {
+          "mean": 41.3467806717018,
+          "median": 37.8735522157861,
+          "std_population": 19.195613223159462,
+          "min": 25.244674512054626,
+          "max": 411.5785962873149
+        },
+        "validation_mse": {
+          "mean": 57.242036489816336,
+          "median": 53.27336883544922,
+          "std_population": 30.032660838678478,
+          "min": 38.396888732910156,
+          "max": 856.0015869140625
+        },
+        "validation_rmse": {
+          "mean": 7.483200138065607,
+          "median": 7.298860790250025,
+          "std_population": 1.1152363800877407,
+          "min": 6.196522309562853,
+          "max": 29.25750479644603
+        },
+        "train_r2": {
+          "mean": 0.9967300667986646,
+          "median": 0.9970047473907471,
+          "std_population": 0.001518095776767065,
+          "min": 0.9674500823020935,
+          "max": 0.9980034828186035
+        },
+        "validation_r2": {
+          "mean": 0.9957178455966336,
+          "median": 0.9960147142410278,
+          "std_population": 0.002246679239705494,
+          "min": 0.9359643459320068,
+          "max": 0.9971275925636292
+        }
+      }
+    },
+    "last_1000_epochs": {
+      "first_epoch": 4001,
+      "last_epoch": 5000,
+      "epoch_count": 1000,
+      "best_validation_epoch": 4044,
+      "metrics": {
+        "train_mse": {
+          "mean": 26.811728993334853,
+          "median": 22.651065273727717,
+          "std_population": 12.242587291957788,
+          "min": 17.95808930696338,
+          "max": 146.872816057935
+        },
+        "validation_mse": {
+          "mean": 54.46050882720947,
+          "median": 50.026567459106445,
+          "std_population": 17.84140881574395,
+          "min": 38.29125213623047,
+          "max": 339.8636779785156
+        },
+        "validation_rmse": {
+          "mean": 7.317973325864148,
+          "median": 7.07294611058026,
+          "std_population": 0.9527723910516538,
+          "min": 6.187992577260453,
+          "max": 18.4353919941648
+        },
+        "train_r2": {
+          "mean": 0.9978795787096023,
+          "median": 0.9982086420059204,
+          "std_population": 0.0009682113898991845,
+          "min": 0.988384485244751,
+          "max": 0.9985798001289368
+        },
+        "validation_r2": {
+          "mean": 0.9959259260892868,
+          "median": 0.9962576329708099,
+          "std_population": 0.0013346774103705783,
+          "min": 0.9745755195617676,
+          "max": 0.9971355199813843
+        }
+      }
+    }
+  },
+  "weights": {
+    "best_epoch_weights_saved": false,
+    "best_epoch_weights_note": "Only scalar best-epoch metrics survived in history; no checkpoint for epoch 3097 was saved.",
+    "final_epoch_weights_saved": true,
+    "final_checkpoint": "output/baseline_final_model.pt",
+    "final_checkpoint_epoch": 5000
+  },
+  "validation_checks": {
+    "history_epochs": 5000,
+    "all_history_values_finite": true,
+    "rmse_formula": "sqrt(MSE)",
+    "r2_mse_relation": "R2 approximately equals 1 - MSE / population_variance(float32 raw DIC labels); checked for all epochs with rtol=2e-7, atol=1e-6.",
+    "r2_formula_max_abs_difference": {
+      "train_r2": 3.158274103043368e-05,
+      "val_r2": 4.381214330351213e-05
+    },
+    "final_checkpoint_rescore_with_original_float32_labels": {
+      "validation_mse": 50.91810607910156,
+      "validation_r2": 0.9961909055709839,
+      "exact_match_to_recovered_final_history": true
+    },
+    "final_checkpoint_rescore_sklearn_raw_float64_labels": {
+      "validation_mse": 50.91807673515193,
+      "validation_r2": 0.9961909277658069
+    }
+  }
+}
