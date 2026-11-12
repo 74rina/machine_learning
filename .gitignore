@@ -221,3 +221,9 @@ __marimo__/
 
 # dataset
 dataset/
+
+# Kaggle submission
+submission.csv
+
+# memo
+*.png
