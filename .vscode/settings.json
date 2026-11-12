@@ -1,0 +1,5 @@
+{
+  "python.defaultInterpreterPath": "/Users/rinayoneyama/rina/Keio/machine_learning/.venv/bin/python",
+  "python.terminal.activateEnvironment": true,
+  "jupyter.notebookFileRoot": "${workspaceFolder}"
+}
