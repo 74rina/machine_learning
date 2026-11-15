@@ -188,3 +188,13 @@ Huber損失（δ=10）、AdamW（`weight_decay=0.025`）、コサイン学習率
 ![OptunaのfANOVAによるパラメータ重要度](output/optuna/parameter_importance.png)
 
 [全試行](output/optuna/trials.csv) · [3シードでの評価](output/optuna/finalists.csv) · [採用設定と実行条件](output/optuna/summary.json)
+
+## 特徴量エンジニアリング（2026-11-15）
+
+| 追加特徴量     | 計算式                  | 期待する効果               |
+| -------------- | ----------------------- | -------------------------- |
+| `log_depth`    | `log1p(R_Depth)`        | 深度の非線形な影響を表現   |
+| `temp_x_sal`   | `R_TEMP × R_Sal`        | 温度と塩分の相互作用       |
+| `temp_squared` | `R_TEMP²`               | 温度とDICの非線形関係      |
+| `DIN_total`    | `NO3uM + NO2uM + NH3uM` | 無機態窒素の総量           |
+| `no3_x_po4`    | `NO3uM × PO4uM`         | 硝酸塩とリン酸塩の相互作用 |
