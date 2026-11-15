@@ -146,4 +146,6 @@ Early Stoppingと最良重みへの復元は行わず、**5,000エポック後�
 
 **`nn.HuberLoss(delta=5)` を採用した。** 平均検証MSEは従来比で11.93%低下した。採用版のシード42では最終検証MSE 26.4941、RMSE 5.1472、R² 0.998018を再現した。
 
+delta=10 の方がkaggleスコア高い。(2026-11-15)
+
 全144試行は [runs.csv](runs.csv) に記録した。数値の添字は `lp` では絶対残差のべき指数、Huber・Pseudo-Huber・Log-cosh・Fair ではDIC単位の尺度、Quantile・Expectile では非対称重み、`epsilon_l1/l2` では絶対残差から引く許容幅を表す。`rmse_batch` は `sqrt(バッチMSE + 1e-6)`、`relative_mse_p` は `(2150 / max(|DIC|, 1))^p` で重み付けしたMSE、`huber_mse_δ_a` は `(1−a) × Huber(δ) + (a/2) × MSE`。
