@@ -17,18 +17,18 @@
   "cosine_eta_min": 1e-06,
   "scaler_fit_rows": 1454,
   "data_sha256": "97ad9fb69fa99c0acd5361fd102d05ff08b2b53125ca1ecbcf689134e1d0a42d",
-  "best_search_trial": 17,
-  "adopted_trial": 0,
+  "best_search_trial": 28,
+  "adopted_trial": 29,
   "adopted_params": {
-    "hidden1": 128,
+    "hidden1": 256,
     "hidden2": 64,
-    "celu_alpha": 3,
+    "celu_alpha": 2.5,
     "huber_delta": 10,
     "batch_size": 64,
-    "learning_rate": 0.001,
-    "weight_decay": 0.025
+    "learning_rate": 0.0006613900635005688,
+    "weight_decay": 0.013820830487311092
   },
-  "adopted_mean_final_val_mse": 24.170684178670246,
-  "adopted_std_final_val_mse": 0.20785891003868295,
-  "adopted_seed_42_final_val_mse": 23.981313705444336
+  "adopted_mean_final_val_mse": 23.657169342041016,
+  "adopted_std_final_val_mse": 0.06478775212092892,
+  "adopted_seed_42_final_val_mse": 23.69611358642578
 }
