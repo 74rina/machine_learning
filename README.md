@@ -1,6 +1,6 @@
 # CalCOFI DIC を予測する MLP
 
-- final score: 4.09542
+- final score: 4.04008
 
 - コード：[Quiz2401_Yoneyama_Rina.ipynb](https://github.com/74rina/machine_learning/blob/main/Quiz2401_Yoneyama_Rina.ipynb)
 
