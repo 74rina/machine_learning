@@ -2,6 +2,8 @@
 
 - final score: 4.09542
 
+- コード：[Quiz2401_Yoneyama_Rina.ipynb](https://github.com/74rina/machine_learning/blob/main/Quiz2401_Yoneyama_Rina.ipynb)
+
 # 最適化の記録
 
 ベースラインのスコア：6.05810
